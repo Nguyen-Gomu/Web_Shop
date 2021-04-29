@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -14,34 +13,57 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Link from '@material-ui/core/Link';
+
+// colors
+import { grey } from 'material-ui-colors';
+
+
 const useStyles = makeStyles((theme) => ({
   grow: {
-    flexGrow: 0,
-    // maxWidth: '100%',
+    // flexGrow: 1,
+    
+  },
+  test:{
+    position: 'relative',
+    display: 'flex',
+    justifyContent:'space-between',
+    backgroundColor:grey[200],
+    color:grey[800],
     [theme.breakpoints.up('sm')]: {
-      maxWidth: '100%',
-      height: 'auto',
-      flexGrow:1,
+      position: 'relative',
+      display: 'flex',
+      justifyContent:'space-between',
     },
   },
   menuButton: {
     display: 'block',
-    marginRight: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
-        display: 'none',
-      },
+      marginRight: theme.spacing(2),
+      display:'none',
+    },
   },
+
+
   title: {
-    display: 'flex',
+    display: 'block',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
   },
-
+  navIcons:{
+    display: 'flex',
+    justifyContent: 'flex-end',
+    [theme.breakpoints.up('sm')]: {
+      '&:nth-child(2)': {
+        display: 'none',
+      }
+    }
+  },
   search: {
-    display: 'none',
+    
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
+    display: 'none',
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
@@ -50,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
+      display: 'block',
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
@@ -73,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '15ch',
+      width: '20ch',
     },
   },
   sectionDesktop: {
@@ -90,13 +113,14 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     display: 'none',
-    color:theme.palette.text.primary,
+    color:grey[900],
     [theme.breakpoints.up('md')]: {
       height: '100%',
       display: 'inline-block',
       alignItems: 'center',
       justifyContent: 'center',
       margin: theme.spacing(1, 3),
+      textDecoration: 'none',
     }
   },
 }));
@@ -126,6 +150,10 @@ export default function Navbar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+
+
+
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -146,7 +174,7 @@ export default function Navbar() {
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -154,20 +182,20 @@ export default function Navbar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton  color="inherit">
+        <IconButton color="inherit">
           <Badge color="secondary">
             <SearchIcon />
           </Badge>
-        </IconButton>   
-        <p>Notifications</p>
+        </IconButton>
+        <p>Search</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton  color="inherit">
+          <Badge badgeContent={11} color="secondary">
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <p>Cart</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -184,28 +212,26 @@ export default function Navbar() {
   );
 
   return (
-    // <div className={classes.container}>
-      <div className={classes.grow}>
-        <AppBar position="static" color='default'>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="open drawer"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography className={classes.title} variant="h6" noWrap>
-              PKGOMU
-            </Typography>
-            <div className={classes.grow} />
-            <nav>
+    <div className={classes.grow}>
+      <AppBar position="static">
+        <Toolbar className={classes.test}>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography className={classes.title} variant="h6" noWrap>
+            Material-UI
+          </Typography>
+          <nav>
               <Link variant="button"  href="#" className={classes.link}>
                 Features
               </Link>
-              <Link variant="button"  href="#" className={classes.link}>
-                Enterprise
+              <Link path="/signup" variant="button"  href="#" className={classes.link}>
+                Sign Up
               </Link>
               <Link variant="button"  href="#" className={classes.link}>
                 Support
@@ -214,8 +240,8 @@ export default function Navbar() {
                 Features
               </Link> 
             </nav>
-            {/* <div className={classes.grow} /> */}
-            <div className={classes.search}>
+          <div className={classes.navIcons}>  
+            {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
@@ -227,16 +253,16 @@ export default function Navbar() {
                 }}
                 inputProps={{ 'aria-label': 'search' }}
               />
-            </div>
-            <div className={classes.grow} />
+            </div> */}
+            {/* <div className={classes.grow} /> */}
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
-                <Badge color="secondary">
-                  <SearchIcon />
+              <IconButton  color="inherit">
+                <Badge  color="secondary">
+                <SearchIcon />
                 </Badge>
               </IconButton>
-              <IconButton aria-label="show 4 new mails" color="inherit">
-                <Badge badgeContent={0} color="secondary">
+              <IconButton aria-label="show 17 new notifications" color="inherit">
+                <Badge badgeContent={17} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
@@ -262,11 +288,11 @@ export default function Navbar() {
                 <MoreIcon />
               </IconButton>
             </div>
-          </Toolbar>
-        </AppBar>
-        {renderMobileMenu}
-        {renderMenu}
-      </div>
-    // </div>
+          </div>
+        </Toolbar>
+      </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    </div>
   );
 }

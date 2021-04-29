@@ -6,19 +6,14 @@ import Footer from './components/Footer/Footer'
 import SignIn from './components/Signin/Signin';
 import SignUp from './components/Signup/Signup';
 import Checkout from './components/Checkout/Checkout';
-import PrimarySearchAppBar from './components/Test/testHover';
+import TemporaryDrawer from './components/Drawer/Drawer';
 
 function App() {
   return (
     <>
-      {/* <Navbar/>
-      <SignIn/>
-      <SignUp/>
-      <Checkout/> */}
-     
-      {/* <Footer /> */}
       <Router>
-        <PrimarySearchAppBar />
+        <Navbar/>
+        <TemporaryDrawer/>
           <Switch>
             <Route path='/' component={SignIn} />
             <Route path='/Checkout' component={Checkout} />
