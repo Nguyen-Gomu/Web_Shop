@@ -67,7 +67,7 @@ function getStepContent(step) {
   }
 }
 
-export default function Checkout() {
+function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -131,3 +131,5 @@ export default function Checkout() {
     </React.Fragment>
   );
 }
+
+export default Checkout;

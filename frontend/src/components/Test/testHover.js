@@ -1,235 +1,300 @@
 import React from 'react';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import StarIcon from '@material-ui/icons/StarBorder';
 import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import MailIcon from '@material-ui/icons/Mail';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import MoreIcon from '@material-ui/icons/MoreVert';
 import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
 
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
+// colors
+import { grey } from 'material-ui-colors';
+
 
 const useStyles = makeStyles((theme) => ({
-  '@global': {
-    ul: {
-      margin: 0,
-      padding: 0,
-      listStyle: 'none',
+  grow: {
+    // flexGrow: 1,
+    
+  },
+  test:{
+    position: 'relative',
+    display: 'flex',
+    justifyContent:'space-between',
+    backgroundColor:grey[200],
+    color:grey[800],
+    [theme.breakpoints.up('sm')]: {
+      position: 'relative',
+      display: 'flex',
+      justifyContent:'space-between',
     },
   },
-  appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
+  menuButton: {
+    display: 'block',
+    [theme.breakpoints.up('sm')]: {
+      marginRight: theme.spacing(2),
+      display:'none',
+    },
   },
-  toolbar: {
-    flexWrap: 'wrap',
+
+
+  title: {
+    display: 'block',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
   },
-  toolbarTitle: {
-    flexGrow: 1,
+  navIcons:{
+    display: 'flex',
+    justifyContent: 'flex-end',
+    [theme.breakpoints.up('sm')]: {
+      '&:nth-child(2)': {
+        display: 'none',
+      }
+    }
+  },
+  search: {
+    
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    display: 'none',
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+      marginLeft: theme.spacing(3),
+      width: 'auto',
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+  },
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
   },
   link: {
-    margin: theme.spacing(1, 1.5),
-  },
-  heroContent: {
-    padding: theme.spacing(8, 0, 6),
-  },
-  cardHeader: {
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[700],
-  },
-  cardPricing: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'baseline',
-    marginBottom: theme.spacing(2),
-  },
-  footer: {
-    borderTop: `1px solid ${theme.palette.divider}`,
-    marginTop: theme.spacing(8),
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6),
-    },
+    display: 'none',
+    color:grey[900],
+    [theme.breakpoints.up('md')]: {
+      height: '100%',
+      display: 'inline-block',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: theme.spacing(1, 3),
+      textDecoration: 'none',
+    }
   },
 }));
 
-const tiers = [
-  {
-    title: 'Free',
-    price: '0',
-    description: ['10 users included', '2 GB of storage', 'Help center access', 'Email support'],
-    buttonText: 'Sign up for free',
-    buttonVariant: 'outlined',
-  },
-  {
-    title: 'Pro',
-    subheader: 'Most popular',
-    price: '15',
-    description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
-      'Priority email support',
-    ],
-    buttonText: 'Get started',
-    buttonVariant: 'contained',
-  },
-  {
-    title: 'Enterprise',
-    price: '30',
-    description: [
-      '50 users included',
-      '30 GB of storage',
-      'Help center access',
-      'Phone & email support',
-    ],
-    buttonText: 'Contact us',
-    buttonVariant: 'outlined',
-  },
-];
-const footers = [
-  {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-  },
-  {
-    title: 'Features',
-    description: ['Cool stuff', 'Random feature', 'Team feature', 'Developer stuff', 'Another one'],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
-  },
-];
-
-export default function Pricing() {
+export default function PrimarySearchAppBar() {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+
+
+
+
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
+
+  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton aria-label="show 11 new notifications" color="inherit">
+          <Badge badgeContent={11} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
-        <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            Company name
+    <div className={classes.grow}>
+      <AppBar position="static">
+        <Toolbar className={classes.test}>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography className={classes.title} variant="h6" noWrap>
+            Material-UI
           </Typography>
           <nav>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Features
-            </Link>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Enterprise
-            </Link>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Support
-            </Link>
-          </nav>
-          <Button href="#" color="primary" variant="outlined" className={classes.link}>
-            Login
-          </Button>
+              <Link variant="button"  href="#" className={classes.link}>
+                Features
+              </Link>
+              <Link path="/signup" variant="button"  href="#" className={classes.link}>
+                Sign Up
+              </Link>
+              <Link variant="button"  href="#" className={classes.link}>
+                Support
+              </Link>
+              <Link variant="button"  href="#" className={classes.link}>
+                Features
+              </Link> 
+            </nav>
+          <div className={classes.navIcons}>  
+            {/* <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </div> */}
+            {/* <div className={classes.grow} /> */}
+            <div className={classes.sectionDesktop}>
+              <IconButton  color="inherit">
+                <Badge  color="secondary">
+                <SearchIcon />
+                </Badge>
+              </IconButton>
+              <IconButton aria-label="show 17 new notifications" color="inherit">
+                <Badge badgeContent={17} color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
-      {/* Hero unit */}
-      <Container maxWidth="sm" component="main" className={classes.heroContent}>
-        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          Pricing
-        </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" component="p">
-          Quickly build an effective pricing table for your potential customers with this layout.
-          It&apos;s built with default Material-UI components with little customization.
-        </Typography>
-      </Container>
-      {/* End hero unit */}
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier) => (
-            // Enterprise card is full width at sm breakpoint
-            <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
-              <Card>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{ align: 'center' }}
-                  subheaderTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Pro' ? <StarIcon /> : null}
-                  className={classes.cardHeader}
-                />
-                <CardContent>
-                  <div className={classes.cardPricing}>
-                    <Typography component="h2" variant="h3" color="textPrimary">
-                      ${tier.price}
-                    </Typography>
-                    <Typography variant="h6" color="textSecondary">
-                      /mo
-                    </Typography>
-                  </div>
-                  <ul>
-                    {tier.description.map((line) => (
-                      <Typography component="li" variant="subtitle1" align="center" key={line}>
-                        {line}
-                      </Typography>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant} color="primary">
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-      {/* Footer */}
-      <Container maxWidth="md" component="footer" className={classes.footer}>
-        <Grid container spacing={4} justify="space-evenly">
-          {footers.map((footer) => (
-            <Grid item xs={6} sm={3} key={footer.title}>
-              <Typography variant="h6" color="textPrimary" gutterBottom>
-                {footer.title}
-              </Typography>
-              <ul>
-                {footer.description.map((item) => (
-                  <li key={item}>
-                    <Link href="#" variant="subtitle1" color="textSecondary">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </Grid>
-          ))}
-        </Grid>
-        <Box mt={5}>
-          {/* <Copyright /> */}
-        </Box>
-      </Container>
-      {/* End footer */}
-    </React.Fragment>
+      {renderMobileMenu}
+      {renderMenu}
+    </div>
   );
 }
