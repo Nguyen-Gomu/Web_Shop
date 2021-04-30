@@ -37,12 +37,12 @@ export default function AddressForm() {
             required
             id="address1"
             name="address1"
-            label="Address line 1"
+            label="Address "
             fullWidth
             autoComplete="shipping address-line1"
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <TextField
             id="address2"
             name="address2"
@@ -50,7 +50,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-line2"
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -64,7 +64,7 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <TextField id="state" name="state" label="State/Province/Region" fullWidth />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <TextField
             required
             id="zip"
@@ -73,15 +73,17 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping postal-code"
           />
-        </Grid>
-        <Grid item xs={12} sm={6}>
+        </Grid> */}
+        <Grid item xs={12}>
           <TextField
             required
-            id="country"
-            name="country"
-            label="Country"
+            id="phoneNumber"
+            name="phoneNumber"
+            label="Phone Number"
             fullWidth
-            autoComplete="shipping country"
+            autoComplete="phone number"
+            type="number"
+            // InputProps={{ inputProps: { min: 0, max: 10} }}
           />
         </Grid>
         <Grid item xs={12}>

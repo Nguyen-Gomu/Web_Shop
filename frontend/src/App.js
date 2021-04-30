@@ -7,16 +7,20 @@ import SignIn from './components/Signin/Signin';
 import SignUp from './components/Signup/Signup';
 import Checkout from './components/Checkout/Checkout';
 import TemporaryDrawer from './components/Drawer/Drawer';
+import AppFooter from './components/test/test'
+
+
 
 function App() {
   return (
     <>
       <Router>
         <Navbar/>
-        <TemporaryDrawer/>
+        <AppFooter />
+        {/* <TemporaryDrawer/> */}
           <Switch>
             <Route path='/' component={SignIn} />
-            <Route path='/Checkout' component={Checkout} />
+            {/* <Route path='/' component={Checkout} /> */}
           </Switch>
         <Footer />
       </Router>

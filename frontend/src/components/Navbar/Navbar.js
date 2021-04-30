@@ -12,7 +12,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Link from '@material-ui/core/Link';
+  import Link from '@material-ui/core/Link';
+import TemporaryDrawer from '../Drawer/Drawer'
 
 // colors
 import { grey } from 'material-ui-colors';
@@ -230,16 +231,22 @@ export default function Navbar() {
               <Link variant="button"  href="#" className={classes.link}>
                 Features
               </Link>
-              <Link path="/signup" variant="button"  href="#" className={classes.link}>
+              <Link path="/signup" variant="button"  href="signup" className={classes.link}>
                 Sign Up
               </Link>
               <Link variant="button"  href="#" className={classes.link}>
                 Support
               </Link>
-              <Link variant="button"  href="#" className={classes.link}>
-                Features
+              <Link path="/Checkout" variant="button"  href="Checkout" className={classes.link}>
+                Checkout
               </Link> 
             </nav>
+
+
+
+
+
+            {/* <TemporaryDrawer/> */}
           <div className={classes.navIcons}>  
             {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -291,6 +298,7 @@ export default function Navbar() {
           </div>
         </Toolbar>
       </AppBar>
+      <TemporaryDrawer />
       {renderMobileMenu}
       {renderMenu}
     </div>

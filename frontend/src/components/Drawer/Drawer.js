@@ -13,9 +13,12 @@ import MailIcon from '@material-ui/icons/Mail';
 
 const useStyles = makeStyles({
   list: {
+
     width: 250,
   },
   fullList: {
+    paddingTop:50,
+    // marginTop:30,
     width: 'auto',
   },
 });
