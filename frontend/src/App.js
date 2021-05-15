@@ -1,31 +1,25 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';
-import './index.css';
-import Footer from './components/Footer/Footer'
-import SignIn from './components/Signin/Signin';
-import SignUp from './components/Signup/Signup';
-import Checkout from './components/Checkout/Checkout';
-import TemporaryDrawer from './components/Drawer/Drawer';
-import AppFooter from './components/test/test'
+import React from 'react'
+import { Suspense } from 'react'
+import {BrowserRouter,Redirect,Route,Switch} from 'react-router-dom'
+import './index.css'
+import Header from './components/Header/Header'
+import MainPage from './components/MainPage/MainPage'
+import Navbar from './components/Navbar/Navbar'
 
+// const Products =React.lazy(()=> import('url'))
 
-
-function App() {
-  return (
-    <>
-      <Router>
-        <Navbar/>
-        <AppFooter />
-        {/* <TemporaryDrawer/> */}
-          <Switch>
-            <Route path='/' component={SignIn} />
-            {/* <Route path='/' component={Checkout} /> */}
-          </Switch>
-        <Footer />
-      </Router>
-    </>
-  );
+function App(){
+  return(
+    <div className="container">
+      <Suspense fallback={<div>Loading.....</div>}>
+        <BrowserRouter>
+          {/* <Header/> */}
+          <Navbar/>
+          
+        </BrowserRouter>
+      </Suspense>
+    </div>
+  )
 }
 
-export default App;
+export default App

@@ -4,7 +4,6 @@ import React from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from './modules/components/Typography';
-import AppFooter from './modules/views/AppFooter';
 import AppAppBar from './modules/views/AppAppBar';
 import AppForm from './modules/views/AppForm';
 import { email, required } from './modules/form/validation';
@@ -96,7 +95,6 @@ function ForgotPassword() {
           )}
         </Form>
       </AppForm>
-      {/* <AppFooter /> */}
     </React.Fragment>
   );
 }

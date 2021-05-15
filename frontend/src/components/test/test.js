@@ -5,17 +5,17 @@ import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-function Copyright() {
-  return (
-    <React.Fragment>
-      {'© '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-    </React.Fragment>
-  );
-}
+// function Copyright() {
+//   return (
+//     <React.Fragment>
+//       {'© '}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Your Website
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//     </React.Fragment>
+//   );
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -95,7 +95,7 @@ export default function AppFooter() {
                 </a>
               </Grid>
               <Grid item>
-                <Copyright />
+                {/* <Copyright /> */}
               </Grid>
             </Grid>
           </Grid>

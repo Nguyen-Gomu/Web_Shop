@@ -12,19 +12,21 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoreIcon from '@material-ui/icons/MoreVert';
-  import Link from '@material-ui/core/Link';
-import TemporaryDrawer from '../Drawer/Drawer'
 
 // colors
 import { grey } from 'material-ui-colors';
+import ListItem from "@material-ui/core/ListItem";
+import List from "@material-ui/core/List";
+
+// sidebar
+import PersistentDrawerLeft from "../Sidebar/Sidebar"
 
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     // flexGrow: 1,
-    
   },
-  test:{
+  container:{
     position: 'relative',
     display: 'flex',
     justifyContent:'space-between',
@@ -46,22 +48,18 @@ const useStyles = makeStyles((theme) => ({
 
 
   title: {
-    display: 'block',
-    [theme.breakpoints.up('sm')]: {
+    
       display: 'block',
-    },
+      textDecoration:'none',
+      fontWeight: '700',
+      fontSize:'25px',
+      color:grey[800],
   },
   navIcons:{
     display: 'flex',
     justifyContent: 'flex-end',
-    [theme.breakpoints.up('sm')]: {
-      '&:nth-child(2)': {
-        display: 'none',
-      }
-    }
   },
   search: {
-    
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     display: 'none',
@@ -112,21 +110,42 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
-  link: {
-    display: 'none',
-    color:grey[900],
+
+  list: {
+    // display: 'flex',
+    // flexDirection:'column',
+    display:'none',
     [theme.breakpoints.up('md')]: {
-      height: '100%',
-      display: 'inline-block',
-      alignItems: 'center',
-      justifyContent: 'center',
-      margin: theme.spacing(1, 3),
-      textDecoration: 'none',
-    }
+        display: 'block',
+        marginBottom: "0",
+        padding: "0",
+        marginTop: "0",    
+    },
   },
+  inlineBlock: {
+    display: "inline-block",
+    padding: "0px",
+    width: "auto",
+    
+  },
+  block: {
+    color: "inherit",
+    padding: "2px",
+    marginLeft:"50px",
+    textTransform: "uppercase",
+    textDecoration: "none",
+    position: "relative",
+    display: "block",
+    fontWeight: "700",
+    fontSize: "12px",
+    '&:hover': {
+        color: "red",
+    },
+    
+  }
 }));
 
-export default function Navbar() {
+export default function Navbar({toggle}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -215,53 +234,46 @@ export default function Navbar() {
   return (
     <div className={classes.grow}>
       <AppBar position="static">
-        <Toolbar className={classes.test}>
+        <Toolbar className={classes.container}>
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={toggle}
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+          {/* <PersistentDrawerLeft/> */}
+          <Typography>
+            <a href="#home" className={classes.title}>
+              GOMU
+            </a>
           </Typography>
-          <nav>
-              <Link variant="button"  href="#" className={classes.link}>
+          <List className={classes.list}>
+            <ListItem className={classes.inlineBlock}>
+              <a href="#home" className={classes.block}>
                 Features
-              </Link>
-              <Link path="/signup" variant="button"  href="signup" className={classes.link}>
-                Sign Up
-              </Link>
-              <Link variant="button"  href="#" className={classes.link}>
-                Support
-              </Link>
-              <Link path="/Checkout" variant="button"  href="Checkout" className={classes.link}>
-                Checkout
-              </Link> 
-            </nav>
-
-
-
-
-
-            {/* <TemporaryDrawer/> */}
+              </a>
+            </ListItem>
+            <ListItem className={classes.inlineBlock}>
+              <a href="#company" className={classes.block}>
+                Footwear
+              </a>
+            </ListItem>
+            <ListItem className={classes.inlineBlock}>
+              <a href="#portfolio" className={classes.block}>
+                Used
+              </a>
+            </ListItem>
+            <ListItem className={classes.inlineBlock}>
+              <a href="#blog" className={classes.block}>
+                About Us
+              </a>
+            </ListItem>
+          </List>
+          {/* RIGHT ICONS */}
           <div className={classes.navIcons}>  
-            {/* <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div> */}
-            {/* <div className={classes.grow} /> */}
             <div className={classes.sectionDesktop}>
               <IconButton  color="inherit">
                 <Badge  color="secondary">
@@ -298,7 +310,6 @@ export default function Navbar() {
           </div>
         </Toolbar>
       </AppBar>
-      <TemporaryDrawer />
       {renderMobileMenu}
       {renderMenu}
     </div>
