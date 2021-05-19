@@ -10,16 +10,12 @@ const register = (req, res, next) => {
             })
         }
 
-        let user = new User({
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPass,
-            phone: req.body.phone
-        })
+        let user = new User(req.body);
         user.save()
         .then(user => {
             res.json({
-                message: 'User added successfully!'
+                message: 'User added successfully!',
+                user
             })
         })
         .catch(error => {

@@ -1,14 +1,7 @@
 const Product = require('../models/productModel');
 
 const CreateProduct = function(req, res, next){
-    const product = new Product({
-        name: req.body.name,
-        brand: req.body.brand,
-        price: req.body.price,
-        img: req.body.img,
-        size: req.body.size,
-        color: req.body.color
-    })
+    const product = new Product(req.body);
     product.save(function(err, Productlist){
         if (err){
             console.log(err);
